@@ -68,6 +68,21 @@ p {
   text-decoration: none;
 }
 
+/* ユーザー勤怠情報テーブル */
+
+#user-table {
+  vertical-align: middle;
+  text-align: center;
+  td {
+    vertical-align: bottom;
+    border-bottom: 3px double #ccc;
+  }
+}
+
+.btn-user-table {
+  margin: 30px 0 10px 0;
+}
+
 /* デバッグ情報 */
 
 .debug_dump {
