@@ -119,6 +119,14 @@ p {
   }
 }
 
+/* ユーザー一覧ページ */
+
+#table-users {
+  td {
+    vertical-align: middle;
+  }
+}
+
 /* デバッグ情報 */
 
 .debug_dump {
