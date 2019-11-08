@@ -5,7 +5,15 @@ class UsersController < ApplicationController
   before_action :admin_user, only: %i(destroy)
   
   def index
-    @users = User.paginate(page: params[:page])
+    if params[:search] == ""
+      redirect_to users_url
+      flash[:danger] = "キーワードを入力してください。"
+    else
+      @users = User.paginate(page: params[:page]).search(params[:search]).order(id: "ASC")
+      if params[:search].present?
+        flash.now[:success] = "検索結果:#{@users.count}件"
+      end
+    end
   end
   
   def new

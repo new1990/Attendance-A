@@ -127,6 +127,18 @@ p {
   }
 }
 
+.input-group {
+  float: right;
+  margin: 20px 15% 0 0px;
+  p {
+    margin-bottom: 10px;
+  }
+}
+
+.paginate-top {
+  margin-top: 70px;
+}
+
 /* デバッグ情報 */
 
 .debug_dump {
