@@ -1,5 +1,5 @@
 <% provide(:title, "ユーザー一覧") %>
-<h1><%= params[:search].presence ? "検索結果" : "ユーザー一覧" %></h1>
+<h1><%= params[:search].present? ? "検索結果" : "ユーザー一覧" %></h1>
 <h3 class="center"><%= link_to "戻る", users_path if params[:search].present? %></h3>
 
 <div class="col-md-10 col-md-offset-1">
