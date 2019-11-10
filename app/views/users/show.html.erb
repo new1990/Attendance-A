@@ -69,7 +69,14 @@
         <tr>
           <td></td>
           <td><%= l(day.worked_on, format: :short) %></td>
-          <td><%= $days_of_the_week[day.worked_on.wday] %></td>
+          <td>
+            <% if day.worked_on.wday == 0 %>
+              <font color="#ff000">
+            <% elsif day.worked_on.wday == 6 %>
+              <font color="#0033cc">
+            <% end %>
+            <%= $days_of_the_week[day.worked_on.wday] %>
+          </td>
           <td></td>
           <td></td>
           <td></td>
