@@ -31,7 +31,7 @@
     </div>
   </div>
   
-  <table class="table table-bordered table-condensed" id="user-table">
+  <table class="table table-bordered table-condensed table-striped" id="user-table">
     <thead>
       <tr>
         <td rowspan="4">残業申請</td>
@@ -77,12 +77,20 @@
             <% end %>
             <%= $days_of_the_week[day.worked_on.wday] %>
           </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td><%= day.started_at.hour if day.started_at.present? %></td>
+          <td><%= day.started_at.min if day.started_at.present? %></td>
+          <td>
+            <% if btn_text = attendance_attend(day) %>
+              <%= link_to "#{btn_text}", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-block btn-attendance" %>
+            <% end %>
+          </td>
+          <td><%= day.finished_at.hour if day.finished_at.present? %></td>
+          <td><%= day.finished_at.min if day.finished_at.present? %></td>
+          <td>
+            <% if btn_text = attendance_leave(day) %>
+              <%= link_to "#{btn_text}", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-block btn-attendance" %>
+            <% end %>
+          </td>
           <td></td>
           <td></td>
           <td></td>
