@@ -17,7 +17,7 @@
         <td>氏名&emsp;<%= @user.name %></td>
         <td>コード</td>
         <td></td>
-        <td>出勤日数</td>
+        <td>出勤日数&emsp;<%= @worked_sum %>日</td>
         <td>締め&emsp;<%= @last_day.strftime('%m/%d') %></td>
       </tr>
     </thead>
@@ -91,7 +91,12 @@
               <%= link_to "#{btn_text}", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-block btn-attendance" %>
             <% end %>
           </td>
-          <td></td>
+          <td>
+            <% if day.started_at.present? && day.finished_at.present? %>
+              <%= str_times = working_times(day.started_at, day.finished_at) %>
+              <% @total_working_times = @total_working_times.to_f + str_times.to_f %>
+            <% end %>
+          </td>
           <td></td>
           <td></td>
           <td></td>
@@ -101,5 +106,16 @@
         </tr>
       <% end %>
     </tbody>
+    
+    <tfoot>
+      <tr>
+        <td></td>
+        <td colspan="2"></td>
+        <td colspan="6"></td>
+        <td><%= format("%.2f", @total_working_times.to_f) %></td>
+        <td colspan="5"></td>
+        <td></td>
+      </tr>
+    </tfoot>
   </table>
 </div>
