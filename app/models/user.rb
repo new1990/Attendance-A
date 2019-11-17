@@ -46,4 +46,16 @@ class User < ApplicationRecord
     return User.all unless search
     User.where(['name LIKE ?', "%#{search}%"])
   end
+  
+  # def self.import(file)
+  #   CSV.foreach(file.path, headers: true) do |row|
+  #     user = find_by(name: row["name"]) || new
+  #     user.attributes = row.to_hash.slice(*update_attributes)
+  #     user.save
+  #   end
+  # end
+  
+  # def self.updatable_attributes
+  #   [:name, :email, :department, :basic_time, :work_time, :superior, :admin]
+  # end
 end

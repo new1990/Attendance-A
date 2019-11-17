@@ -3,6 +3,15 @@
 <h3 class="center"><%= link_to "戻る", users_path if params[:search].present? %></h3>
 
 <div class="col-md-10 col-md-offset-1">
+  <div class="col-md-5">
+    <%= form_tag import_users_path, multipart: true do %>
+      <%= file_field_tag :file, class: "form-control" %>
+      <%= submit_tag "CSVをインポート", class: "btn btn-primary btn-block btn-csv" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="col-md-10 col-md-offset-1">
   <div class="input-group">
     <p>ユーザー名検索</p>
     <%= form_tag(users_path, method: :get) do %>
