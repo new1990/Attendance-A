@@ -25,17 +25,17 @@
   
   <% if current_user.superior? %>
     <div class="news">
-      <p>【所属長承認申請のお知らせ】</p>
-      <p>【勤怠変更申請のお知らせ】</p>
-      <p>【残業申請のお知らせ】</p>
+      <p>❌【所属長承認申請のお知らせ】</p>
+      <p>❌【勤怠変更申請のお知らせ】</p>
+      <p>❌【残業申請のお知らせ】</p>
     </div>
   <% end %>
   
   <div class="btn-user-table">
     <div class="btn-proup">
       <%= link_to "勤怠情報を編集", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %>
-      <%= link_to "CSV出力", '#', class: "btn btn-primary" %>
-      <%= link_to "勤怠編集ログ(承認済)", '#', class: "btn btn-primary" %>
+      <%= link_to "❌CSV出力", '#', class: "btn btn-primary" %>
+      <%= link_to "❌勤怠編集ログ(承認済)", '#', class: "btn btn-primary" %>
     </div>
   </div>
   
@@ -75,7 +75,7 @@
     <tbody>
       <% @attendances.each do |day| %>
         <tr>
-          <td></td>
+          <td><%= link_to "❌残業申請", '#', class: "btn btn-primary" %></td>
           <td><%= l(day.worked_on, format: :short) %></td>
           <td>
             <% if day.worked_on.wday == 0 %>
@@ -122,7 +122,19 @@
         <td colspan="6"></td>
         <td><%= format("%.2f", @total_working_times.to_f) %></td>
         <td colspan="5"></td>
-        <td></td>
+        <td>
+          <div class="application-form">
+            <%= "❌所属長承認　未" %>
+            <div class="form-group">
+              <select class="form-control" id="application" name="application">
+                <option></option>
+                <option>未設定1</option>
+                <option>未設定2</option>
+              </select>
+            </div>
+            <%= link_to "申請", '#', class: "btn btn-primary btn-block" %>
+          </div>
+        </td>
       </tr>
     </tfoot>
   </table>
