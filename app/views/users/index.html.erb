@@ -12,6 +12,35 @@
 </div>
 
 <div class="col-md-10 col-md-offset-1">
+  <% @users.each do |user| %>
+    <div>
+      <div>
+        <p><%= user.name %></p>
+        <p>| <%= link_to "削除", '#', class: "btn btn-primary" %></p>
+      </div>
+      <div class="jumbotron">
+        <div class="col-md-2">
+          <a class="btn btn-primary btn-lg btn-edit" data-toggle="collapse" href="#collapse<%= user.id %>" role="button">
+            編集
+          </a>
+        </div>
+      </div>
+      <div class="collapse panel-collapse" id="collapse<%= user.id %>">
+        <div class="card card-body">
+          <%= render 'user', { user: user } %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+
+ 
+
+
+<!-- ここから保留 -->
+<div class="col-md-10 col-md-offset-1">
   <div class="input-group">
     <p>ユーザー名検索</p>
     <%= form_tag(users_path, method: :get) do %>
@@ -26,16 +55,12 @@
     <thead>
       <tr>
         <th><%= User.human_attribute_name :name %></th>
-        <th><%= User.human_attribute_name :basic_work_time if current_user.admin? %></th>
-        <th><%= User.human_attribute_name :work_time if current_user.admin? %></th>
       </tr>
     </thead>
     
     <% @users.each do |user| %>
       <tr>
         <td><%= current_user.admin? ? (link_to user.name, user) : user.name %></td>
-        <td><%= format_basic_info(user.basic_work_time) if current_user.admin? %></td>
-        <td><%= format_basic_info(user.work_time) if current_user.admin? %></td>
         <td>
           <%= link_to "基本情報編集", edit_basic_info_user_path(user), remote: true, class: "btn btn-success" if current_user.admin? %>
           <%= link_to "削除", user, method: :delete,
@@ -47,6 +72,8 @@
   </table>
   <%= will_paginate %>
 </div>
+<!-- ここまで保留 -->
 
 <!-- モーダルウィドウ -->
 <div id="edit_basic_info" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<div id="edit_basic_info" data-toggle="collapse" href="edit_basic_info" role="button" aria-expanded="false" aria-controls="edit_basic_info"></div>
