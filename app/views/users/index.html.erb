@@ -1,4 +1,6 @@
 <% provide(:title, "ユーザー一覧") %>
+<% provide(:class_text, "user--edit") %>
+<% provide(:btn_text, "更新") %>
 <h1><%= params[:search].present? ? "検索結果" : "ユーザー一覧" %></h1>
 <h3 class="center"><%= link_to "戻る", users_path if params[:search].present? %></h3>
 
@@ -18,18 +20,22 @@
         <p><%= user.name %></p>
         <p>| <%= link_to "削除", '#', class: "btn btn-primary" %></p>
       </div>
+      
+      <!-- アコーディオン表示ここから -->
       <div class="jumbotron">
         <div class="col-md-2">
-          <a class="btn btn-primary btn-lg btn-edit" data-toggle="collapse" href="#collapse<%= user.id %>" role="button">
+          <a class="btn btn-primary btn-lg btn-edit" data-toggle="collapse" href="#collapse<%= user.id %>" role="button"> <!-- user.idを渡して各ユーザーに紐付け -->
             編集
           </a>
         </div>
       </div>
-      <div class="collapse panel-collapse" id="collapse<%= user.id %>">
-        <div class="card card-body">
-          <%= render 'user', { user: user } %>
+      <div class="collapse collapse-panel" id="collapse<%= user.id %>"> <!-- user.idを渡して各ユーザーに紐付け -->
+        <div class="collapse-body">
+          <%= render 'form', { user: user } %> <!-- render partial: 'form', locals: { user: user } でも可。 -->
         </div>
       </div>
+      <!-- ここまでアコーディオン表示 -->
+      
     </div>
   <% end %>
 </div>

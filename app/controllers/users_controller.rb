@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i(show edit update destroy edit_basic_info update_basic_info)
   before_action :logged_in_user, only: %i(index show edit update destroy edit_basic_info update_basic_info)
-  before_action :correct_user, only: %i(edit update)
+  # before_action :correct_user, only: %i(edit update)
   before_action :admin_user, only: %i(index destroy edit_basic_info update_basic_info)
   before_action :admin_or_correct_user, only: %i(show)
   before_action :set_one_month, only: %i(show)
@@ -47,10 +47,14 @@ class UsersController < ApplicationController
   
   def update
     if @user.update_attributes(user_params)
-      flash[:success] = "ユーザー情報を更新しました。"
-      redirect_to @user
+      flash[:success] = "#{@user.name}の情報を更新しました。"
+      redirect_to users_url
+    elsif @user.name.blank?
+      flash[:danger] = "更新に失敗しました。<br>" + @user.errors.full_messages.join("<br>")
+      redirect_to users_url
     else
-      render :edit
+      flash[:danger] = "#{@user.name}の情報更新に失敗しました。<br>" + @user.errors.full_messages.join("<br>")
+      redirect_to users_url
     end
   end
   
