@@ -157,20 +157,35 @@ p {
 }
 
 .input-group {
-  float: right;
-  margin: 20px 15% 0 0px;
+  margin: 20px 0 0 15px;
   p {
     margin-bottom: 10px;
   }
 }
 
-.paginate-top {
-  margin-top: 70px;
+.csv-group {
+  margin-right: 30%;
 }
 
 .btn-csv {
   margin-top: 10px;
 }
+
+.paginate-top {
+  margin-bottom: -30px;
+}
+.paginate-bottom {
+  margin-top: -30px;
+}
+
+.acd-users {
+  margin-top: 20px;
+}
+
+.collapse-body {
+  margin-bottom: 50px;
+}
+
 /* モーダルウィンドウ位置調整 */
 
 .modal-dialog-center {

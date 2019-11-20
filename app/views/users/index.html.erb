@@ -4,40 +4,59 @@
 <h1><%= params[:search].present? ? "検索結果" : "ユーザー一覧" %></h1>
 <h3 class="center"><%= link_to "戻る", users_path if params[:search].present? %></h3>
 
-<div class="col-md-10 col-md-offset-1">
-  <div class="col-md-5">
-    <%= form_tag import_users_path, multipart: true do %>
-      <%= file_field_tag :file, class: "form-control" %>
-      <%= submit_tag "CSVをインポート", class: "btn btn-primary btn-block btn-csv" %>
+<div class="container">
+  <div class="row form-group">
+    <!-- CSVインポートフォーム -->
+    <div class="col-md-3 col-md-offset-1 csv-group">
+      <%= form_tag import_users_path, multipart: true do %>
+        <%= file_field_tag :file, class: "form-control" %>
+        <%= submit_tag "CSVをインポート", class: "btn btn-primary btn-block btn-csv" %>
+      <% end %>
+    </div>
+    <!-- ユーザー検索フォーム -->
+    <div class="col-md-2 col-md-offset-2 input-group">
+      <p>ユーザー名検索</p>
+      <%= form_tag(users_path, method: :get) do %>
+        <span class="input-group-btn">
+          <%= text_field_tag :search, '', placeholder: 'キーワドを入力', class: "form-control"  %>
+          <%= submit_tag '検索', name: :nil, class: "btn btn-primary" %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 paginate-top"><%= will_paginate %></div>
+  </div>
+  
+  <div class="row col-md-10 col-md-offset-1 acd-users">
+    <% @users.each do |user| %>
+      <div>
+        <div>
+          <p><%= user.name %></p>
+          <p>| <%= link_to "削除", '#', class: "btn btn-primary" %></p>
+        </div>
+        
+        <!-- アコーディオン表示 -->
+        <div class="acd jumbotron">
+          <div class="acd-content col-md-2">
+            <a class="btn btn-primary btn-lg btn-edit" data-toggle="collapse" href="#collapse<%= user.id %>" role="button"> <!-- user.idを渡して各ユーザーに紐付け -->
+              編集
+            </a>
+          </div>
+        </div>
+        <div class="collapse collapse-panel" id="collapse<%= user.id %>"> <!-- user.idを渡して各ユーザーに紐付け -->
+          <div class="collapse-body">
+            <%= render 'form', { user: user } %> <!-- render partial: 'form', locals: { user: user } でも可。 -->
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
-</div>
-
-<div class="col-md-10 col-md-offset-1">
-  <% @users.each do |user| %>
-    <div>
-      <div>
-        <p><%= user.name %></p>
-        <p>| <%= link_to "削除", '#', class: "btn btn-primary" %></p>
-      </div>
-      
-      <!-- アコーディオン表示ここから -->
-      <div class="jumbotron">
-        <div class="col-md-2">
-          <a class="btn btn-primary btn-lg btn-edit" data-toggle="collapse" href="#collapse<%= user.id %>" role="button"> <!-- user.idを渡して各ユーザーに紐付け -->
-            編集
-          </a>
-        </div>
-      </div>
-      <div class="collapse collapse-panel" id="collapse<%= user.id %>"> <!-- user.idを渡して各ユーザーに紐付け -->
-        <div class="collapse-body">
-          <%= render 'form', { user: user } %> <!-- render partial: 'form', locals: { user: user } でも可。 -->
-        </div>
-      </div>
-      <!-- ここまでアコーディオン表示 -->
-      
-    </div>
-  <% end %>
+  
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 paginate-bottom"><%= will_paginate %></div>
+  </div>
 </div>
 
 
