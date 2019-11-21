@@ -7,7 +7,7 @@
         <% if logged_in? %>
           <% if current_user.admin? %>
             <li><%= link_to "ユーザー一覧", users_path %></li>
-            <li><%= link_to "🔺出勤社員一覧", attend_employees_user_path %></li>
+            <li><%= link_to "🔺出勤社員一覧", attend_employees_user_path(current_user) %></li>
             <li><%= link_to "❌拠点情報の修正", '#' %></li>
             <li><%= link_to "❌基本情報の修正", '#' %></li>
           <% end %>
