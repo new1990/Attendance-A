@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i(show edit update destroy edit_basic_info update_basic_info)
+  before_action :set_user, only: %i(show edit update destroy attend_employees edit_basic_info update_basic_info)
   before_action :logged_in_user, only: %i(index show edit update destroy attend_employees edit_basic_info update_basic_info)
   # before_action :correct_user, only: %i(edit update)
   before_action :admin_user, only: %i(index destroy attend_employees edit_basic_info update_basic_info)
   before_action :admin_or_correct_user, only: %i(show)
-  before_action :set_one_month, only: %i(show)
+  before_action :set_one_month, only: %i(show attend_employees)
   
   def index
     if params[:search] == ""
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   end
   
   def attend_employees
-    @users = User.all
+    @users = working_users
   end
   
   def edit_basic_info
@@ -83,7 +83,7 @@ class UsersController < ApplicationController
   private
   
     def user_params
-      params.require(:user).permit(:name, :email, :affiliation, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :affiliation, :employee_number, :uid, :superior, :admin, :password, :password_confirmation)
     end
     
     def basic_info_params
