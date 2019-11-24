@@ -14,12 +14,11 @@ module AttendancesHelper
     false
   end
   
-  # 本日の勤務中社員を検索する
+  # 本日の勤務中社員取得用
   def working_users
-    if User.where(id: Attendance.where(worked_on: Date.current))
     User.where(id: Attendance.where.not(started_at: nil).
-         where(id: Attendance.where(finished_at: nil)).select(:user_id))
-    end
+         where(id: Attendance.where(finished_at: nil)).
+         where(id: Attendance.where(worked_on: Date.current)).select(:user_id))
   end
   
   def attendances_invalid?
