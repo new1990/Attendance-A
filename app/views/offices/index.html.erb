@@ -1,4 +1,6 @@
 <% provide(:title, "拠点一覧") %>
+<% provide(:class_text, "office--edit") %>
+<% provide(:btn_text, "新規作成") %>
 <h1>拠点一覧</h1>
 
 <div>
@@ -29,7 +31,10 @@
   </div>
    <div class="collapse collapse-panel" id="collapse">
     <div class="collapse-body">
-      <div>< render 'form', { user: user } ></div>
+      <%= render 'form'%>
     </div>
   </div>
 </div>
+
+<!-- モーダルウィンドウ -->
+<div id="new" data-toggle="collapse" href="new" role="button" aria-expanded="false" aria-controls="new"></div>

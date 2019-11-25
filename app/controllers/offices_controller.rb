@@ -6,6 +6,7 @@ class OfficesController < ApplicationController
   end
   
   def new
+    @office = Office.new
   end
   
   def create
