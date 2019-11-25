@@ -198,6 +198,21 @@ p {
   }
 }
 
+/* 拠点一覧ページ */
+
+#offices-table {
+  vertical-align: middle;
+  text-align: center;
+  thead td {
+    vertical-align: bottom;
+    border-bottom: 3px double #ccc;
+  }
+}
+
+.btn-office-new {
+  margin: -20px 0 0 -65px;
+}
+
 /* モーダルウィンドウ位置調整 */
 
 .modal-dialog-center {

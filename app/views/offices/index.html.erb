@@ -1,0 +1,35 @@
+<% provide(:title, "拠点一覧") %>
+<h1>拠点一覧</h1>
+
+<div>
+  <table class="table table-bordered table-hover" id="offices-table">
+    <thead>
+      <tr>
+        <td></td>
+        <td>拠点番号</td>
+        <td>拠点名</td>
+        <td>勤怠種類</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="jumbotron">
+    <div class="acd-content col-md-2">
+      <a class="btn btn-primary btn-lg btn-office-new" data-toggle="collapse" href="#collapse" role="button">
+        拠点情報追加
+      </a>
+    </div>
+  </div>
+   <div class="collapse collapse-panel" id="collapse">
+    <div class="collapse-body">
+      <div>< render 'form', { user: user } ></div>
+    </div>
+  </div>
+</div>

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     end
     collection do
       post 'import'
+      resources :offices
     end
     resources :attendances, only: :update
   end
