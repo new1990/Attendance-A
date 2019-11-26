@@ -1,5 +1,4 @@
 <%= form_with(model: @office, local: true) do |f| %>
-  
   <%= f.label Office.human_attribute_name :office_number, class: "label-#{yield(:class_text)}" %>
   <%= f.number_field :office_number, class: "form-control" %>
   

@@ -1,13 +1,10 @@
 class OfficesController < ApplicationController
-   before_action :logged_in_user, only: %i(index new create edit update destroy)
-   before_action :admin_user, only: %i(index new create edit update destroy)
+   before_action :logged_in_user, only: %i(index create edit update destroy)
+   before_action :admin_user, only: %i(index create edit update destroy)
   
   def index
     @office = Office.new
-  end
-  
-  def new
-    # @office = Office.new
+    @offices = Office.all
   end
   
   def create
@@ -16,7 +13,8 @@ class OfficesController < ApplicationController
       flash[:success] = "拠点登録が完了しました。"
       redirect_to offices_url
     else
-      render :index
+      flash[:danger] = "拠点登録に失敗しました、入力エラーが#{@office.errors.count}件あります。<br>" + @office.errors.full_messages.join("<br>")
+      redirect_to offices_url
     end
   end
   

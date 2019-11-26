@@ -4,37 +4,49 @@
 <h1>拠点一覧</h1>
 
 <div>
-  <table class="table table-bordered table-hover" id="offices-table">
+  <table class="table table-bordered table-condensed table-hover" id="offices-table">
     <thead>
       <tr>
+        <td></td>
         <td></td>
         <td>拠点番号</td>
         <td>拠点名</td>
         <td>勤怠種類</td>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td></td>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-      </tr>
-    </tbody>
+    <% @offices.each do |office| %>
+      <tbody>
+        <tr>
+          <td>
+            <a class="btn btn-primary btn-office-edit" data-toggle="collapse" href="#collapse-edit<%= office.id %>" role="button">
+              修正
+            </a>
+          </td>
+          <td><%= link_to "削除", '#', class: "btn btn-primary" %></td>
+          <td><%= office.office_number %></td>
+          <td><%= office.office_name %></td>
+          <td><%= office.attendance_type %></td>
+        </tr>
+      </tbody>
+      
+      <div class="collapse collapse-panel" id="collapse-edit<%= office.id %>">
+          <div class="collapse-body">
+            <%= render 'form' %>
+          </div>
+        </div>
+      
+    <% end %>
   </table>
   <div class="jumbotron">
     <div class="acd-content col-md-2">
-      <a class="btn btn-primary btn-lg btn-office-new" data-toggle="collapse" href="#collapse" role="button">
+      <a class="btn btn-primary btn-lg btn-office-new" data-toggle="collapse" href="#collapse-new" role="button">
         拠点情報追加
       </a>
     </div>
   </div>
-   <div class="collapse collapse-panel" id="collapse">
+  <div class="collapse collapse-panel" id="collapse-new">
     <div class="collapse-body">
-      <%= render 'form'%>
+     <%= render 'form' %>
     </div>
   </div>
 </div>
-
-<!-- アコーディオン -->
-<div id="new" data-toggle="collapse" href="new" role="button" aria-expanded="false" aria-controls="new"></div>
