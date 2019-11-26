@@ -27,14 +27,14 @@
           <td><%= office.office_name %></td>
           <td><%= office.attendance_type %></td>
         </tr>
-      </tbody>
-      
-      <div class="collapse collapse-panel" id="collapse-edit<%= office.id %>">
-          <div class="collapse-body">
-            <%= render 'form' %>
-          </div>
+        <div>
+          <div class="collapse collapse-panel" id="collapse-edit<%= office.id %>">
+              <div class="collapse-body">
+                <%= render 'form' %>
+              </div>
+            </div>
         </div>
-      
+      </tbody>
     <% end %>
   </table>
   <div class="jumbotron">
