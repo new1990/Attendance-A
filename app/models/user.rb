@@ -47,6 +47,31 @@ class User < ApplicationRecord
     User.where(['name LIKE ?', "%#{search}%"])
   end
   
+  def self.import(file)
+    imported_num = 0
+    
+    open(file.path, 'r:cp932:utf-8', undef: :replace) do |f|
+      csv = CSV.new(f, :headers => :first_row)
+      csv.each do |row|
+        next if row.header_row?
+        table = Hash[[row.headers, row.fields].transpose]
+        
+        user = find_by(email: table["email"])
+        if user.nil?
+          user = new
+        end
+        
+        user.attributes = table.to_hash.slice(*table.to_hash.except(:email, :created_at, :updated_at).keys)
+        
+        if user.valid?
+          user.save!
+          imported_num += 1
+        end
+      end
+    end
+    imported_num
+  end
+  
   # def self.import(file)
   #   CSV.foreach(file.path, headers: true) do |row|
   #     user = find_by(name: row["name"]) || new

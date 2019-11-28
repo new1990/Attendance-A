@@ -6,13 +6,15 @@
 
 <div class="container">
   <div class="row form-group">
+    
     <!-- CSVインポートフォーム -->
     <div class="col-md-3 col-md-offset-1 csv-group">
-      <%= form_tag import_users_path, multipart: true do %>
-        <%= file_field_tag :file, class: "form-control" %>
+      <%= form_tag(import_users_path, method: :post, multipart: true) do %>
+        <%= file_field_tag :csv_file, class: "form-control" %>
         <%= submit_tag "CSVをインポート", class: "btn btn-primary btn-block btn-csv" %>
       <% end %>
     </div>
+    
     <!-- ユーザー検索フォーム -->
     <div class="col-md-2 col-md-offset-2 input-group">
       <p>ユーザー名検索</p>
