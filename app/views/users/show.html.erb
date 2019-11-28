@@ -131,8 +131,9 @@
             <div class="form-group">
               <select class="form-control" id="application" name="application">
                 <option></option>
-                <option>未設定1</option>
-                <option>未設定2</option>
+                <% @users.each do |user| %>
+                <option><%= user.name %></option>
+                <% end %>
               </select>
             </div>
             <%= link_to "申請", '#', class: "btn btn-primary btn-block" %>

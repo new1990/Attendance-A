@@ -71,16 +71,4 @@ class User < ApplicationRecord
     end
     imported_num
   end
-  
-  # def self.import(file)
-  #   CSV.foreach(file.path, headers: true) do |row|
-  #     user = find_by(name: row["name"]) || new
-  #     user.attributes = row.to_hash.slice(*update_attributes)
-  #     user.save
-  #   end
-  # end
-  
-  # def self.updatable_attributes
-  #   [:name, :email, :affiliation, :basic_work_time, :work_time, :superior, :admin]
-  # end
 end
