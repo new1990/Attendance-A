@@ -75,6 +75,9 @@ class UsersController < ApplicationController
     @users = working_users
   end
   
+  def application_info
+  end
+  
   def edit_basic_info
   end
   

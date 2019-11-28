@@ -28,7 +28,7 @@
   
   <% if current_user.superior? %>
     <div class="news">
-      <p>❌【所属長承認申請のお知らせ】</p>
+      <p>🔺【所属長承認申請のお知らせ】<%= link_to "XX件の通知があります。", application_info_user_path(current_user), class: "notice-superior" %></p>
       <p>❌【勤怠変更申請のお知らせ】</p>
       <p>❌【残業申請のお知らせ】</p>
     </div>
@@ -132,7 +132,7 @@
               <select class="form-control" id="application" name="application">
                 <option></option>
                 <% @users.each do |user| %>
-                <option><%= user.name %></option>
+                <option value="<%= user.id %>"><%= user.name %></option>
                 <% end %>
               </select>
             </div>
