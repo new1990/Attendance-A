@@ -53,4 +53,16 @@ class ApplicationController < ActionController::Base
     flash[:danger] = "ページ情報の取得に失敗しました、再アクセスしてください。"
     redirect_to root_url
   end
+  
+  # 1ヶ月の勤怠申請用
+  def set_application_month
+    @first_day = params[:date].nil? ?
+    Date.current.beginning_of_month : params[:date].to_date
+    
+    @attendances = @user.attendances.where(worked_on: @first_day).order(:worked_on)
+  
+  rescue ActiveRecord::RecordInvalid
+    flash[:danger] = "ページ情報の取得に失敗しました、再アクセスしてください。"
+    redirect_to root_url
+  end
 end

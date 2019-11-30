@@ -128,15 +128,12 @@
         <td>
           <div class="application-form">
             <%= "❌所属長承認\u329e　未" %>
-            <div class="form-group">
-              <select class="form-control" id="application" name="application">
-                <option></option>
-                <% @users.each do |user| %>
-                <option value="<%= user.id %>"><%= user.name %></option>
-                <% end %>
-              </select>
+            <%= form_with(model: @request, url: user_requests_path(@first_day, current_user), method: :post, local: true) do |f| %>
+            <%= f.select :user, @users.pluck(:name), {include_blank: true}, {class: "form-control"} %>
+            <div>
+            <%= f.submit "申請", class: "btn btn-primary btn-block" %>
             </div>
-            <%= link_to "申請", '#', class: "btn btn-primary btn-block" %>
+            <% end %>
           </div>
         </td>
       </tr>

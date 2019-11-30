@@ -21,5 +21,6 @@ Rails.application.routes.draw do
       resources :offices
     end
     resources :attendances, only: :update
+    resources :requests
   end
 end
