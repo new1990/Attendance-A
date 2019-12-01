@@ -28,7 +28,7 @@
   
   <% if current_user.superior? %>
     <div class="news">
-      <p>🔺【所属長承認申請のお知らせ】<%= link_to "XX件の通知があります。", application_info_user_path(current_user), class: "notice-superior" %></p>
+      <p>🔺【所属長承認申請のお知らせ】<%= link_to "XX件の通知があります。", attendances_one_month_apply_user_path(current_user), class: "notice-superior" %></p>
       <p>❌【勤怠変更申請のお知らせ】</p>
       <p>❌【残業申請のお知らせ】</p>
     </div>
@@ -128,7 +128,7 @@
         <td>
           <div class="application-form">
             <%= "❌所属長承認\u329e　未" %>
-            <%= form_with(model: @request, url: user_requests_path(@first_day, current_user), method: :post, local: true) do |f| %>
+            <%= form_with(model: @request, url: attendances_one_month_apply_user_path(@first_day, current_user), method: :post, local: true) do |f| %>
             <%= f.select :user, @users.pluck(:name), {include_blank: true}, {class: "form-control"} %>
             <div>
             <%= f.submit "申請", class: "btn btn-primary btn-block" %>

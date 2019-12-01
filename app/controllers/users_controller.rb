@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :admin_user, only: %i(index destroy attend_employees edit_basic_info update_basic_info)
   before_action :admin_or_correct_user, only: %i(show)
   before_action :set_one_month, only: %i(show attend_employees application_info)
-  before_action :set_application_month, only: %i(application_info)
+  before_action :set_one_month_apply, only: %i(application_info)
   
   def index
     if params[:search] == ""
@@ -76,7 +76,7 @@ class UsersController < ApplicationController
     @users = working_users
   end
   
-  def application_info
+  def one_month_apply
   end
   
   def edit_basic_info

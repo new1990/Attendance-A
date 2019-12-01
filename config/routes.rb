@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get 'attend_employees'
-      get 'application-info'
+      get 'attendances/one_month_apply'
       get 'edit_basic_info'
       patch 'update_basic_info'
       get 'attendances/edit_one_month'
@@ -21,6 +21,5 @@ Rails.application.routes.draw do
       resources :offices
     end
     resources :attendances, only: :update
-    resources :requests
   end
 end
