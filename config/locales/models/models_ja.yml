@@ -26,6 +26,11 @@ ja:
         finished_at: 退勤時間
         note: 備考
         user: ユーザーID
+        superior: 上長
+        status: 指示者確認\u329e
+        month_apply: 申請月
+        month_approval: 承認月
+        month_check: 変更
       office:
         office_number: 拠点番号
         office_name: 拠点名
