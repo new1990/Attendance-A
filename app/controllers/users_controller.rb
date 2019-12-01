@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i(show edit update destroy attend_employees application_info edit_basic_info update_basic_info)
+  before_action :set_user, only: %i(show edit update destroy attend_employees edit_basic_info update_basic_info)
   before_action :logged_in_user, only: %i(index show edit update destroy attend_employees edit_basic_info update_basic_info)
   # before_action :correct_user, only: %i(edit update)
   before_action :admin_user, only: %i(index destroy attend_employees edit_basic_info update_basic_info)
   before_action :admin_or_correct_user, only: %i(show)
-  before_action :set_one_month, only: %i(show attend_employees application_info)
-  before_action :set_one_month_apply, only: %i(application_info)
+  before_action :set_one_month, only: %i(show attend_employees)
+  # before_action :set_one_month_apply, only: %i(one_month_apply)
   
   def index
     if params[:search] == ""
@@ -76,8 +76,20 @@ class UsersController < ApplicationController
     @users = working_users
   end
   
-  def one_month_apply
-  end
+  # def one_month_apply
+  #   @users = User.all
+  #   @attendance = Attendance.find(params[:id])
+  # end
+  
+  # def update_one_month_apply
+  #   if @user.update_attributes(month_apply_params)
+  #     flash[:success] = "#{@user.name}の申請を提出しました。"
+  #     redirect_to user_url
+  #   else
+  #     flash[:danger] = "#{@user.name}の申請に失敗しました。"
+  #     redirect_to user_url
+  #   end
+  # end
   
   def edit_basic_info
   end
@@ -100,4 +112,8 @@ class UsersController < ApplicationController
     def basic_info_params
       params.require(:user).permit(:affiliation, :basic_work_time, :work_time)
     end
+    
+    # def month_apply_params
+    #   params.require(:user).permit(attendances: [:superior_id, :month_apply, :month_approval])[:attendances]
+    # end
 end

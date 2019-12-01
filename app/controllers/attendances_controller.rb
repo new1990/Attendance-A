@@ -1,5 +1,5 @@
 class AttendancesController < ApplicationController
-  before_action :set_user, only: %i(edit_one_month update_one_month one_month_apply)
+  before_action :set_user, only: %i(edit_one_month update_one_month one_month_apply update_one_month_apply)
   before_action :logged_in_user, only: %i(update edit_one_month update_one_month one_month_apply)
   before_action :admin_or_correct_user, only: %i(edit_one_month update_one_month)
   before_action :set_one_month, only: %i(edit_one_month)
@@ -48,9 +48,28 @@ class AttendancesController < ApplicationController
     redirect_to attendances_edit_one_month_user_url(date: params[:date])
   end
   
+  def one_month_apply
+    @users = User.all
+    @attendance = Attendance.find(params[:id])
+  end
+  
+  def update_one_month_apply
+    if @attendance.update_attributes(month_apply_params)
+      flash[:success] = "#{@user.name}の申請を提出しました。"
+      redirect_to user_url
+    else
+      flash[:danger] = "#{@user.name}の申請に失敗しました。"
+      redirect_to user_url
+    end
+  end
+  
   private
   
     def attendances_params
       params.require(:user).permit(attendances: [:started_at, :finished_at, :note])[:attendances]
+    end
+    
+    def month_apply_params
+      params.require(:user).permit(attendances: [:superior_id, :status, :month_apply, :month_approval, :month_check])[:attendances]
     end
 end

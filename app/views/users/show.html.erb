@@ -128,8 +128,8 @@
         <td>
           <div class="application-form">
             <%= "❌所属長承認\u329e　未" %>
-            <%= form_with(model: @request, url: attendances_one_month_apply_user_path(@first_day, current_user), method: :post, local: true) do |f| %>
-            <%= f.select :user, @users.pluck(:name), {include_blank: true}, {class: "form-control"} %>
+            <%= form_with(model: @attendances, url: attendances_update_one_month_apply_user_path(@first_day, current_user), method: :patch, local: true) do |f| %>
+            <%= f.select :user, @users.pluck(:name, :id), {include_blank: true}, {class: "form-control"} %>
             <div>
             <%= f.submit "申請", class: "btn btn-primary btn-block" %>
             </div>
